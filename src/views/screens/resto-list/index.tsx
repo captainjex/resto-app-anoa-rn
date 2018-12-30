@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { ScrollView, View, ActivityIndicator } from 'react-native'
 import { Http } from '../../../services/Http'
 import RestaurantList from '../../components/RestaurantList'
 import { AppStyle } from '../../styles'
@@ -14,25 +14,35 @@ export class RestoListScreen extends React.Component<
   constructor(props: RestoListScreenProps) {
     super(props)
     this.state = {
-      restaurants: []
+      restaurants: [],
+      isLoading: false
     }
   }
 
   async componentDidMount() {
+    this.setState({ isLoading: true })
     const restaurants = await Http.getRestaurants()
     this.setState({
-      restaurants
+      restaurants,
+      isLoading: false
     })
   }
 
   public render() {
     const { theme } = this.props as Required<RestoListScreenProps>
-    const { restaurants } = this.state
+    const { restaurants, isLoading } = this.state
 
     return (
-      <View style={theme.styles.screenContainer}>
-        <RestaurantList items={restaurants} />
-      </View>
+      <ScrollView>
+        <View style={theme.styles.screenContainer}>
+          {isLoading &&
+            <ActivityIndicator size="large" style={{ justifyContent: 'center', height: 80 }} />
+          }
+          {!isLoading &&
+            <RestaurantList items={restaurants} />
+          }
+        </View>
+      </ScrollView>
     )
   }
 }

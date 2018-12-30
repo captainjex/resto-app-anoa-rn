@@ -1,5 +1,5 @@
 import React from 'react'
-import { StatusBar, View } from 'react-native'
+import { View } from 'react-native'
 import { MainScreenNav } from './nav'
 import { MainScreenProps } from './props'
 
