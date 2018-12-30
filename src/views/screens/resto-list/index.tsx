@@ -47,15 +47,10 @@ export class RestoListScreen extends React.Component<
       <ScrollView>
         <View style={theme.styles.screenContainer}>
           <View
-            style={{
-              elevation: 2,
-              borderRadius: 10,
-              margin: 12,
-              padding: 10
-            }}
+            style={{ elevation: 2, borderRadius: 4, margin: 12, padding: 10 }}
           >
             <TextInput
-              style={{ height: 48, padding: 6 }}
+              style={{ height: 48, padding: 6, backgroundColor: '#fee9c0', marginBottom: 4 }}
               placeholder="Cari Resto..."
               onChangeText={query => this.setState({ query })}
             />
