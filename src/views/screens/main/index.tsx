@@ -10,7 +10,7 @@ export class MainScreen extends React.Component<MainScreenProps> {
 
   public render() {
     return (
-      <View style={{ flex: 1, marginTop: StatusBar.currentHeight }}>
+      <View style={{ flex: 1 }}>
         <MainScreenNav />
       </View>
     )
