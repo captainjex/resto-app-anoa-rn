@@ -1,5 +1,11 @@
 import React from 'react'
-import { ScrollView, View, ActivityIndicator } from 'react-native'
+import {
+  ActivityIndicator,
+  Button,
+  ScrollView,
+  TextInput,
+  View
+} from 'react-native'
 import { Http } from '../../../services/Http'
 import RestaurantList from '../../components/RestaurantList'
 import { AppStyle } from '../../styles'
@@ -15,17 +21,22 @@ export class RestoListScreen extends React.Component<
     super(props)
     this.state = {
       restaurants: [],
-      isLoading: false
+      isLoading: false,
+      query: ''
     }
   }
 
-  async componentDidMount() {
+  async loadData() {
     this.setState({ isLoading: true })
-    const restaurants = await Http.getRestaurants()
+    const restaurants = await Http.getRestaurants(this.state.query)
     this.setState({
       restaurants,
       isLoading: false
     })
+  }
+
+  componentDidMount() {
+    this.loadData()
   }
 
   public render() {
@@ -35,12 +46,32 @@ export class RestoListScreen extends React.Component<
     return (
       <ScrollView>
         <View style={theme.styles.screenContainer}>
-          {isLoading &&
-            <ActivityIndicator size="large" style={{ justifyContent: 'center', height: 80 }} />
-          }
-          {!isLoading &&
-            <RestaurantList items={restaurants} />
-          }
+          <View
+            style={{
+              elevation: 2,
+              borderRadius: 10,
+              margin: 12,
+              padding: 10
+            }}
+          >
+            <TextInput
+              style={{ height: 48, padding: 6 }}
+              placeholder="Cari Resto..."
+              onChangeText={query => this.setState({ query })}
+            />
+            <Button
+              color="#fcb119"
+              title="cari"
+              onPress={() => this.loadData()}
+            />
+          </View>
+          {isLoading && (
+            <ActivityIndicator
+              size="large"
+              style={{ justifyContent: 'center', height: 80 }}
+            />
+          )}
+          {!isLoading && <RestaurantList items={restaurants} />}
         </View>
       </ScrollView>
     )
