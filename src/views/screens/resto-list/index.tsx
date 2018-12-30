@@ -41,7 +41,6 @@ export class RestoListScreen extends React.Component<
 
   public render() {
     const { theme } = this.props as Required<RestoListScreenProps>
-    const { restaurants, isLoading } = this.state
 
     return (
       <ScrollView>
@@ -60,15 +59,21 @@ export class RestoListScreen extends React.Component<
               onPress={() => this.loadData()}
             />
           </View>
-          {isLoading && (
-            <ActivityIndicator
-              size="large"
-              style={{ justifyContent: 'center', height: 80 }}
-            />
-          )}
-          {!isLoading && <RestaurantList items={restaurants} />}
+          { this.renderList() }
         </View>
       </ScrollView>
     )
+  }
+
+  renderList () {
+    const { restaurants, isLoading } = this.state
+
+    if (isLoading) {
+      return <ActivityIndicator
+        size="large"
+        style={{ justifyContent: 'center', height: 80 }}
+      />
+    }
+    return <RestaurantList items={restaurants} />
   }
 }
