@@ -1,6 +1,7 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { Http } from '../../../services/Http'
+import RestaurantList from '../../components/RestaurantList'
 import { AppStyle } from '../../styles'
 import { RestoListScreenProps } from './props'
 import { RestoListScreenState } from './state'
@@ -30,9 +31,7 @@ export class RestoListScreen extends React.Component<
 
     return (
       <View style={theme.styles.screenContainer}>
-        {restaurants.map(r => (
-          <Text key={r.id}>{r.name}</Text>
-        ))}
+        <RestaurantList items={restaurants} />
       </View>
     )
   }
