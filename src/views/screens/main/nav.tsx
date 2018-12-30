@@ -18,6 +18,11 @@ export const MainScreenNav = createMaterialTopTabNavigator(
     }
   },
   {
-    initialRouteName: 'RestoList'
+    initialRouteName: 'RestoList',
+    tabBarOptions: {
+      style: {
+        backgroundColor: '#fcb119'
+      },
+    }
   }
 )

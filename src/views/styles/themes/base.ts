@@ -15,8 +15,7 @@ export const BaseTheme = createTheme(
     // define theme styles
     screenContainer: {
       flex: 1,
-      padding: vars.spacing.normal,
-      backgroundColor: vars.colors.background
+      padding: vars.spacing.normal
     }
   })
 )
